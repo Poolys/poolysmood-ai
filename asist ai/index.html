@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Pooly's Mood AI</title></head>
+<body>
+<h1>Pooly's Mood AI</h1>
+<textarea id="msg" rows="4" cols="50"></textarea><br>
+<button onclick="send()">Invia</button>
+<p id="reply"></p>
+
+<script>
+async function send(){
+  const msg=document.getElementById("msg").value;
+  const res = await fetch("http://localhost:3000/ask-ai",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({message:msg})
+  });
+  const data = await res.json();
+  document.getElementById("reply").innerText=data.reply;
+}
+</script>
+</body>
+</html>
